@@ -11,5 +11,35 @@ public class Main {
 
         //TODO: testar implementação
 
+        try {
+            for (int i=0; i<100; i++) {
+                queue.enqueue(i);
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            /*
+            System.out.println("Size: " + queue.size());
+            queue.clear();
+            System.out.println("Size after clear: " + queue.size());
+            */
+
+            System.out.println("Queue is empty? " + queue.isEmpty());
+
+            System.out.println("Front of queue is: " + queue.front());
+
+            System.out.println("Pop all elements from queue:");
+            while(!queue.isEmpty()) {
+                System.out.println("dequeue: " + queue.dequeue());
+            }
+
+            System.out.println("Queue is empty? " + queue.isEmpty());
+
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

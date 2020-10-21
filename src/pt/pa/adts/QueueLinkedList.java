@@ -1,9 +1,10 @@
 package pt.pa.adts;
 
 /**
- * TODO: Fornecer documentação da classe.
  *
- * @param <T>
+ * Implementacao de fila ({@link Queue}) baseado em linked list
+ *
+ * @param <T> elemento a armazenar
  */
 public class QueueLinkedList<T> implements Queue<T> {
 
@@ -11,10 +12,75 @@ public class QueueLinkedList<T> implements Queue<T> {
     private int size;
 
     public QueueLinkedList() {
-        //TODO: construtor deve inicializar uma fila vazia
+        this.header = new Node(null, null, null);
+        this.trailer = new Node(null, null, null);
+
+        this.header.next = this.trailer;
+        this.trailer.prev = this.header;
+
+        this.size = 0;
     }
 
-    //TODO: implementar métodos da interface à custa da estrutura de dados fornecida
+    @Override
+    public void enqueue(T element) throws FullQueueException {
+        //O(1)
+        try {
+            Node newNode = new Node(element, trailer.prev, null);
+            trailer.prev.next = newNode;
+            trailer.prev = newNode;
+            this.size++;
+        } catch(OutOfMemoryError e) {
+            throw new FullQueueException("No memory for more elements");
+        }
+
+    }
+
+    @Override
+    public T dequeue() throws EmptyQueueException {
+
+        if(isEmpty()) throw new EmptyQueueException();
+
+        T element = header.next.element;
+        header.next = header.next.next;
+
+        this.size--;
+
+        return element;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return header.next == null;
+    }
+
+    @Override
+    public T front() throws EmptyQueueException {
+        if(isEmpty()) throw new EmptyQueueException();
+
+        return header.next.element;
+    }
+
+    @Override
+    public void clear() {
+        this.header.next = null;
+        this.trailer.prev = null;
+        this.size = 0;
+    }
+
+    @Override
+    public int size() {
+        //O(1)
+        //return this.size;
+
+        //O(n)
+        int counter = 0;
+        Node current = header.next;
+        while(current != null) {
+            counter++;
+            current = current.next;
+        }
+        return counter;
+    }
 
     private class Node {
         private T element;
