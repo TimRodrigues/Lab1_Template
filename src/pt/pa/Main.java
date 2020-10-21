@@ -11,6 +11,8 @@ public class Main {
 
         //TODO: testar implementação
 
+        System.out.println("Size: " + queue.size());
+
         try {
             for (int i=0; i<100; i++) {
                 queue.enqueue(i);

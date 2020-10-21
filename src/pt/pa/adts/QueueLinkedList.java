@@ -70,9 +70,10 @@ public class QueueLinkedList<T> implements Queue<T> {
     @Override
     public int size() {
         //O(1)
-        //return this.size;
+        return this.size;
 
         //O(n)
+        /*
         int counter = 0;
         Node current = header.next;
         while(current != null) {
@@ -80,6 +81,7 @@ public class QueueLinkedList<T> implements Queue<T> {
             current = current.next;
         }
         return counter;
+         */
     }
 
     private class Node {
