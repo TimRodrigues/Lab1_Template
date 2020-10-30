@@ -50,7 +50,7 @@ public class QueueLinkedList<T> implements Queue<T> {
 
     @Override
     public boolean isEmpty() {
-        return header.next == null;
+        return header.next.element == null;
     }
 
     @Override
